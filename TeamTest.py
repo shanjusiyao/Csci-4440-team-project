@@ -17,7 +17,7 @@ class TeamTest(unittest.TestCase):
         self.M12 = Student(12, "M12", self.private)
 
         # initialize Team Objects Team(name, id, publicity, leader)
-        #                                              v
+        #                                                     v
         #                                        Student(id, username, publicity)
         self.Team1 = Team( "Team1", 1, self.public, self.L1 )
         self.Team2 = Team( "Team2", 2, self.private, self.L2 )
