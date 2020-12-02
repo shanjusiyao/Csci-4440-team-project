@@ -104,6 +104,54 @@ class StudentTest(unittest.TestCase):
         self.assertTrue( self.Stud1.declineTeam(self.Stud2) )
         self.assertEqual( len( self.Stud2.getTeams() ), 0 )
         
+    def test_addAndDeleteTag(self):
+        #adds
+        self.assertTrue(self.Stud.addTag("Python"))
+        self.assertTrue(self.Stud.addTag("Monday"))
+        self.assertFalse(self.Stud.addTag("None"))
+        self.assertEqual(len(self.Stud.getStudentTag()),2)
+
+        #delete
+        self.assertTrue(self.Stud.deleteTag("Python"))
+        self.assertFalse(self.Stud.deleteTag("Python"))
+        self.assertFalse(self.Stud.deleteTag("Java"))
+        self.assertEqual(len(self.Stud.getStudentTag()),1)
+
+        #setPrivateOrPublic
+        self.assertEqual(self.Stud.public, True)
+        self.setPrivate()
+        self.assertEqual(self.Stud.public, False)
+        self.setPublic()
+        self.assertEqual(self.Stud.public, True)
+
+        #setID
+        self.assertFalse(self.Stud.setID(231))
+        self.assertTrue(self.Stud.setID(661955587))
+        self.assertEqual(self.Stud.getStudentID(),661955587)
+        
+    def test_StudentTeam(self):
+        #create
+        self.assertTrue(self.createTeam("Team_A", self.getStudentCourse()[0].assignment[0]))
+        self.assertFalse(self.createTeam("SameTeam", self.getStudentCourse()[0].assignment[0]))
+        self.assertEqual(self.getStudentTeam()[1], "Team_A")
+
+        #invite
+        self.assertTrue(self.InviteTeam(self.getStudentCourse()[0].assignment[0], self.getStudentTeam()[0], [self.L1,self.L2]))
+        self.assertTrue(self.L1.acceptTeam(self.getStudentTeam()[0]))
+        self.assertFalse(self.L1.acceptTeam(self.getStudentTeam()[1]))
+        self.assertEqual(len(self.getStudentTeam()[0].members),2)
+
+        #decline
+        self.assertTrue(self.L2.declineTeam(self.getStudentTeam()[0]))
+        self.assertFalse(self.L2.declineTeam(self.getStudentTeam()[0]))
+        self.assertEqual(len(self.getStudentTeam()[0].members),2)
+
+        #remove
+        self.assertTrue(self.L1.removeTeam(self.getStudentTeam()[0]))
+        self.assertEqual(len(self.getStudentTeam()[0].members),1)
+        self.assertTrue(self.Stud.removeTeam(self.getStudentTeam()[0]))
+        self.assertEqual(self.getStudentTeam()[0],NULL)
+        
 
 if __name__ == '__main__':
     unittest.main()
