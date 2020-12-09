@@ -1,0 +1,73 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+li {
+	display: inline;
+	float: left;
+	color: white;
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 20px;
+	display: block;
+	padding: 20px 16px;
+}
+
+li a {
+	color: white;
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 20px;
+	display: block;
+	padding: 20px 16px;
+}
+
+a:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.active {
+  color: #333;
+}
+
+.column1 {
+  float: left;
+  margin-left: 300px;
+  margin-bottom: 30px;
+  width: 25%;
+  padding: 10px;
+  height: 650px; /* Should be removed. Only for demonstration */
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+	float: left;
+	margin-left: 150px;
+	margin-bottom: 30px;
+	width: 25%;
+	padding: 10px;
+	height: 650px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  	content: "";
+  	display: table;
+  	clear: both;
+}
+
+p {
+	color: black;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="displayTeam.css">
+	<script type="text/javascript" src="login.js"></script>
+</head>
+
+<body>
+
+<ul>
+  <li><a href="/mainPage.html">Courses</a></li>
+  <li><a href="/csci.html">CSCI-4440</a></li>
+  <li><a class="active"><b>Team Assignment 2</b></a></li>
+  <li style="float:right"><a href="/account.html">Account</a></li>
+</ul>
+
+<div class="row" style="background-color: #CD9B9B;color:white;padding:50px;">
+  <div class="side">
+    <h3>Find a Team</h3>
+    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+    <ul id="myMenu">
+      <li><a href="/TeamAssign1EDT.html">EDT</a></li>
+      <li><a href="#">Troy</a></li>
+      <li><a href="#">Python</a></li>
+    </ul>
+    <div style="background-color: #ABCEA5;color:black;padding:10px;">
+      <h4>DEMO Team 1 <button type="button" class="button" onclick="#">Apply</button></h4>
+      <div class="filterDiv">EDT</div>
+      <div class="filterDiv">Python</div>
+      <br>
+      <br>
+    </div> 
+    <br>
+  </div>
+
+  <div class="main">
+    <h2>Team Assignment 2</h2>
+    <p><b>DUE DATE:</b> DECEMBER 7, 2020</p>
+    <p><b>REQUIRED TEAM SIZE:</b> 3-5</p>
+    <p><b>DETAILED DESCRIPTION:</b> <a href="/displayTeam.html">specification.pdf</a></p>
+    <br>
+    <h2>Current Team</h2>
+    <p><b>NONE</b>
+    <br>
+    <p><b>Acount Status:</b></p>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="radios"></label>
+          <div class="col-md-4"> 
+          <label style="color: black" class="radio-inline" for="radios-0">
+            <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+            Public</label> 
+          <label style="color: black" class="radio-inline" for="radios-1">
+            <input type="radio" name="radios" id="radios-1" value="2">
+            Private</label> 
+          </div>
+      </div>
+    <p><b>MY TAGS:</b></p>
+    <div class="container">
+      <div class="filterDiv">EDT</div>
+      <div><a class="x" href="#" title="Delete">&times</a></div><br>
+      <div class="filterDiv">Troy</div>
+      <div><a href="#" title="Delete">&times</a></div><br>
+      <div class="filterDiv">Python</div>
+      <div><a href="#" title="Delete">&times</a></div><br>
+      <div class="filterDiv">WeChat</div>
+      <div><a href="#" title="Delete">&times</a></div>
+    </div>
+    <br>
+    <br>
+    <label style="color:black" for="uname">Add Tag</label>
+      <input type="text" placeholder="Enter a Phrase" name="uname" required>
+      <button type="button" class="button" onclick="#">Add</button>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+
+</body>

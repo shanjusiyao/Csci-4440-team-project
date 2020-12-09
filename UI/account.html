@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="mainPage.css">
+	<script type="text/javascript" src="login.js"></script>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+
+<body>
+
+<ul>
+  <li><a href="/mainPage.html">Courses</a></li>
+  <li><a href="/Teams.html">Teams</a></li>
+  <li style="float:right"><a class="active"><b>Account</b></a></li>
+</ul>
+
+<div class="row">
+  <div class="columnCenter" style="background-color: #CD9B9B;">
+    <h2 style="color: white">User Profile</h2>
+    <form name="profile" onsubmit="return validateForm() ;" method="post">
+      <label>RCS ID: demo</label> <i class='fas'>&#xf044;</i>
+      <label style="margin-left: 250px">Username: demoUser</label> <i class='fas'>&#xf044;</i>
+      <br>
+      <br>
+      <label>RIN: 111111111</label> <i class='fas'>&#xf044;</i>
+      <label style="margin-left: 244px">Class Standing: Junior</label> <i class='fas'>&#xf044;</i>
+      <br>
+      <br>
+      <label> Email: demo@rpi.edu</label> <i class='fas'>&#xf044;</i>
+      <label style="margin-left: 206px">Major(s): Computer Science</label> <i class='fas'>&#xf044;</i>
+      <br>
+      <br>
+      <label>Pronouns: she/her </label> <i class='fas'>&#xf044;</i>
+      <br>
+      <br>
+    </form>
+    <p><b>GENERAL TAGS:</b><label style="margin-left: 30px" style="color:black" for="uname">Add Tag</label>
+      <input type="text" placeholder="Enter a Phrase" name="uname" required>
+      <button type="button" class="button" onclick="window.location.href='/displayTeam.html'">Add</button></p>
+    <div class="container">
+      <div class="filterDiv">EDT</div>
+      <div><a class="x" href="/displayTeamDel1.html" title="Delete">&times</a></div><br>
+      <div class="filterDiv">Troy</div>
+      <div><a href="/displayTeamDel2.html" title="Delete">&times</a></div><br>
+    </div>
+    <br>
+    <br>
+    <button type="button" class="button">Save</button> <button type="button" class="button">Cancel</button>
+    <br>
+    <br>
+    <button style="float:right;margin-right: 80px;" type="button" class="button" onclick="window.location.href='/login.html'">Log Out</button>
+  </div>
+</div>
+
+
+</body>

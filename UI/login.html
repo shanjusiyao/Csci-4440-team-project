@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="login.css">
+	<script type="text/javascript" src="login.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="header">
+		<h1>Welcome To TEAM-UP</h1>
+	</div>
+
+	<form name="login" onsubmit="return validateForm() ;" method="post">
+		<label for="uname">Username</label>
+    	<input type="text" placeholder="Enter RCS ID" name="uname" required><br>
+
+
+    	<label for="psw">Password</label>
+    	<input type="password" placeholder="Enter Password" name="psw" required><br>
+
+		<button type="button" class="button" onclick="window.location.href='/mainPage.html'">Log In</button>
+
+		<label> <input type="checkbox" checked="checked" name="remember"> Remember me</label>
+
+		  <div class="container">
+		  	<button type="button" class="button">Cancel</button>
+			<span class="psw"> <a href="#">Forgot password?</a></span>
+		  </div>
+	</form>
+</div>
+
+</body>
