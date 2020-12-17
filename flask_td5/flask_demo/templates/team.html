@@ -1,0 +1,359 @@
+<html>
+    <head>
+        <title>Team</title>
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <body>
+        <a href="/logout">Log out</a>
+        <form action="#" method="post" id="add">
+            <p>Name<input type=text name=name id="add-name"></p>
+            <p>Public(yes or no)<input type=text name=public id="add-public"></p>
+            <p>Tags<input type=text name=tags id="add-tags"></p>
+            <p><input type="submit" id="agroup" value="Add this group"></p>
+        </form>
+
+        <form action="#" method="POST" id="filter">
+            <p>Filter<input type="text" name="filter" id="filter_val"></p>
+            <p><input type="submit" name="filter_button" value=filter id="filterb"></p>
+        </form>
+
+        <form action="#" method="POST" id="delete">
+            <p>Delete Team(by name)<input type="text" name="delete" id="delete_val"></p>
+            <p><input type="submit" name="delete_button" value=delete id="deleteb"></p>
+        </form>
+
+        <form action="#" method="POST" id="add">
+            <p>Add Team(by id)<input type="text" name="add" id="add_val"></p>
+            <p><input type="submit" name="add_button" value=add id="addb"></p>
+        </form>
+
+        <form action="#" method="POST" id="leave">
+            <p>Leave Team(by id)<input type="text" name="leave" id="leave_val"></p>
+            <p><input type="submit" name="leave_button" value=leave id="leaveb"></p>
+        </form>
+
+        <form action="#" method="GET" id="search">
+            <p>Search for teams by team name<input type="text" name="search" id="search_val"></p>
+            <p><input type="submit" name="search_button" value=search id="searchb"></p>
+        </form>
+
+        <form action="#" method="GET" id="mt">
+            <p>Modify tags for students(separate with /) Student name:<input type="text" name="mt" id="mt_val"></p>
+            <p>New tags<input type="text" name="mtt" id="mtt_val"></p>
+            <p><input type="submit" name="mt_button" value=mt id="mtb"></p>
+        </form>
+
+        <form action="#" method="GET" id="ms">
+            <p>Modify tags for teams(separate with /) Teamid:<input type="text" name="ms" id="ms_val"></p>
+            <p>New tags<input type="text" name="mst" id="mst_val"></p>
+            <p><input type="submit" name="ms_button" value=ms id="msb"></p>
+        </form>
+
+        <button id="filterme">Filter By Me</button>
+
+        <p>Students' teams:</p>
+        <ul class="student-team">
+
+        </ul>
+
+        <ul class="team-list">
+
+        </ul>
+
+        <script>
+            $("#searchb").on('click', async (event) => {
+                event.preventDefault();
+                let htmlstr = `<div><ul class='team-list'>`;
+                fetch('/getTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'val': $("#search_val").val(),
+                            'search': 'tmp'
+                        }
+                    )
+                }).then(
+                    body => body.json()
+                ).then(
+                    jsonData => {
+                        for(let obj of jsonData) {
+                            htmlstr += `<li><p>id: ${obj[0]}</p><p>Team Name: ${obj[1]}</p><p>Public: ${obj[2]}</p><p>Tags: ${obj[3]}</p><button class="join" id="${obj[0]}">Join</button></li>`;
+                        }
+                        htmlstr += "</ul></div>";
+                        console.log(htmlstr);
+                        $(".team-list").html(
+                            htmlstr
+                        );
+                    }
+                );
+            }) 
+            $("#filterme").on('click', async (event) => {
+                event.preventDefault();
+                let htmlstr = `<div><ul class='team-list'>`;
+                fetch('/getTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'me': 'me',
+                            'tmp': 'tmp'
+                        }
+                    )
+                }).then(
+                    body => body.json()
+                ).then(
+                    jsonData => {
+                        for(let obj of jsonData) {
+                            htmlstr += `<li><p>id: ${obj[0]}</p><p>Team Name: ${obj[1]}</p><p>Public: ${obj[2]}</p><p>Tags: ${obj[3]}</p><button class="join" id="${obj[0]}">Join</button></li>`;
+                        }
+                        htmlstr += "</ul></div>";
+                        console.log(htmlstr);
+                        $(".team-list").html(
+                            htmlstr
+                        );
+                    }
+                );
+            })
+            $("#filterb").on('click', async (event) => {
+                event.preventDefault();
+                let htmlstr = `<div><ul class='team-list'>`;
+                fetch('/getTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'tag': $("#filter_val").val(),
+                            'tmp': 'tmp'
+                        }
+                    )
+                }).then(
+                    body => body.json()
+                ).then(
+                    jsonData => {
+                        for(let obj of jsonData) {
+                            htmlstr += `<li><p>id: ${obj[0]}</p><p>Team Name: ${obj[1]}</p><p>Public: ${obj[2]}</p><p>Tags: ${obj[3]}</p><button class="join" id="${obj[0]}">Join</button></li>`;
+                        }
+                        htmlstr += "</ul></div>";
+                        console.log(htmlstr);
+                        $(".team-list").html(
+                            htmlstr
+                        );
+                    }
+                );
+            })
+            $("#deleteb").on('click', async (event) => {
+                event.preventDefault();
+                await fetch('/deleteTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'name': $("#delete_val").val(),
+                            'tmp': 'tmp'
+                        }
+                    )
+                });
+                getDataAndRender();
+            })
+
+            $("#addb").on('click', async (event) => {
+                event.preventDefault();
+                await fetch('/addTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'teamid': $("#add_val").val(),
+                            'name': 'name',
+                            'tmp': 'tmp'
+                        }
+                    )
+                });
+                getDataAndRender();
+            })
+            
+            $("#leaveb").on('click', async (event) => {
+                event.preventDefault();
+                await fetch('/leaveTeam', {
+                    method: 'post'
+                });
+                getDataAndRender();
+            })
+
+            $("#agroup").on('click', async (event) => {
+                event.preventDefault();
+                console.log($("add-public").val());
+                const data = JSON.stringify({
+                        name: $("#add-name").val(),
+                        public: $("#add-public").val(),
+                        tags: $("#add-tags").val() 
+                });
+                console.log(data);
+                await fetch('/addteam', {
+                    method: 'post',
+                    body: data
+                })
+                getDataAndRender();
+            })
+
+            $("#msb").on('click', async (event) => {
+                event.preventDefault();
+                await fetch('/mt', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'teamid': $("#ms_val").val(),
+                            'tags': $("#mst_val").val()
+                        }
+                    )
+                });
+                getDataAndRender();
+            })
+
+            $("#mtb").on('click', async (event) => {
+                event.preventDefault();
+                await fetch('/ms', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'teamid': $("#mt_val").val(),
+                            'tags': $("#mtt_val").val()
+                        }
+                    )
+                });
+                getDataAndRender();
+            })
+
+            const getDataAndRender = () => {
+                let d;
+                let htmlstr = `<div><ul class='team-list'>`;
+                let res = "";
+                fetch("/getStudentTeam", {
+                    method: 'get'
+                }).then(
+                    data => data.json()
+                ).then(
+                    jsonData => {
+                        console.log(jsonData)
+                        for (const key in jsonData) {
+                            res += `<li>${key}: ${jsonData[key]}</li>`;
+                        }
+                        $(".student-team").html(
+                            res
+                        )
+                    }
+                )
+                fetch("/getTeam", {
+                    method: 'get',
+                }).then(
+                    data => data.json()
+                ).then(
+                    jsonData => {
+                        console.log(jsonData);
+                        for(let obj of jsonData) {
+                            htmlstr += `<li><p>id: ${obj[0]}</p><p>Team Name: ${obj[1]}</p><p>Public: ${obj[2]}</p><p>Tags: ${obj[3]}</p><button class="join" id="${obj[0]}">Join</button></li>`;
+                        }
+                        htmlstr += "</ul></div>";
+                        console.log(htmlstr);
+                        $(".team-list").html(
+                            htmlstr
+                        );
+                    }
+                );
+                
+
+                // for (let d of data) {
+
+                // }
+                
+            }
+            
+            $(document.body).on('click', '.join', async (event) => {
+                console.log(event.target.id)
+                await fetch('/addTeam', {
+                    method: 'post',
+                    body: JSON.stringify(
+                        {
+                            'teamid': event.target.id,
+                            'tmp': 'tmp'
+                        }
+                    )
+                });
+                getDataAndRender();
+            })
+            getDataAndRender();
+        </script>
+        <style>
+            #add {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #add > *:not(:last-child) {
+                margin-right: 20px;
+            }
+
+            #filter {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #filter > *:not(:last-child) {
+                margin-right: 20px;
+            }
+
+
+            #delete {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #search {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #mt {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #ms {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #leave {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #delete > *:not(:last-child) {
+                margin-right: 20px;
+            }
+
+            .team-list {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #filterme {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+        </style>
+    </body>
+</html>
